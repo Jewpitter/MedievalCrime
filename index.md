@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+This would be a detailed explanation of the medieval crime website, its collections, and the past, present, or future research to be done.
