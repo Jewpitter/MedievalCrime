@@ -175,12 +175,12 @@
 /**
  * Page content
  */
-.page-content {
+.post-content {
   padding: $spacing-unit 0;
   flex: 1;
 }
 
-.page-heading {
+.post-heading {
   @include relative-font-size(2);
 }
 
@@ -209,14 +209,53 @@
 
 
 
+
+/**
+ * Pages  (The things for creating posts)
+ */
+
+.input-doc,
+.input-date,
+.input-author,
+.input-desc,
+.input-cover {
+   margin: 20px 0;
+   display: flex;
+   align-items: center;
+ }
+
+.input-doc label,
+.input-date label,
+.input-author label,
+.input-desc label,
+.input-cover label {
+   flex: 0 0 120px;
+   padding-right: 20px;
+ }
+
+.input-doc input[type="file"],
+.input-date select,
+.input-author input,
+.input-desc textarea,
+.input-cover input[type="file"] {
+  flex: 1;
+}
+
 /**
  * Posts
  */
 .post-header {
   margin-bottom: $spacing-unit;
 }
-
 .post-title {
+  text-align: center;
+  padding-bottom: 7.5px;
+  border-bottom: 2px dotted silver;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  margin-left: 80px;
+  margin-right: 80px;
+
   @include relative-font-size(2.625);
   letter-spacing: -1px;
   line-height: 1;
@@ -227,7 +266,6 @@
 }
 
 .post-content {
-  margin-bottom: $spacing-unit;
 
   h2 {
     @include relative-font-size(2);

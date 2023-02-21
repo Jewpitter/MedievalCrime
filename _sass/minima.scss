@@ -42,11 +42,12 @@ $on-laptop: 800px !default;
   font-size: $base-font-size * $ratio;
 }
 
-// Import partials.
+// These ↓ are import statements for the minima preset
 @import "minima/base",
 "minima/layout",
 "minima/syntax-highlighting"
 ;
+
 
 // YOU NEED TO PUT .CSS UNDER THESE IMPORT STATEMENTS OR THEY MIGHT BE OVERWRITTEN!!!
 
@@ -55,20 +56,33 @@ $on-laptop: 800px !default;
   font-size: 12px;
 }
 
-.post-img{
-  // find a way to say, display to the right of everything else pertaining to post-title
-  border: 2px;
-  margin: 5px;
+.post-item {
+  display: flex;
+  align-items: center;
+}
 
+.img-div {
+  flex: 0 0 auto;
+  padding: 10px;
+}
+
+.post-img {
+  border: 3px solid black;
+  border-radius: 5px;
+}
+
+.post-content {
+  flex: 1 1 auto;
 }
 
 .post-meta {
   display: inline;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .post-link {
   display: inline;
+  font-size: 18px;
 }
 
 h3 {
@@ -77,5 +91,5 @@ h3 {
 
 .cat {
   font-size: 10px;
-  padding-top: 5px;
+  padding-top: 4px;
 }

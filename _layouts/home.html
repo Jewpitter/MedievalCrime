@@ -13,23 +13,28 @@ layout: default
     <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
     <ul class="post-list">
       {%- for post in site.posts -%}
-      <li>
-        <!-- posts are automatically loaded by date_format -->
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <!-- Insert an image here, make sure it iis before the span (date) -->
-        <div class="post-img"> </div>
-        <!-- Find a way to attach an image to a post -->
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
+      <li class="post-item">
+              <div class="img-div">
+                <!-- Insert an image here -->
+                <img class="post-img" src="{{ post.image_url}}"; height="100px"; width="100px;" >
+              </div>
 
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        <span class="post-excerpt"> {{ post.content | strip_html | truncatewords: 50 }} </span>
+              <div class="post-content">
+                <!-- posts are automatically loaded by date_format -->
+                {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+                <span class="post-meta">{{ post.date | date: date_format }}</span>
 
-        <span class="cat"> {%- for category in post.categories -%} <a> {{ category | escape }} </a> {%- endfor -%} </span>
-      </li>
+                <h3>
+                  <a class="post-link" href="{{ post.url | relative_url }}">
+                    {{ post.title | escape }}
+                  </a>
+                </h3>
+                <span class="post-excerpt"> {{ post.content | strip_html | truncatewords: 50 }} </span>
+                <!-- Don't Ask me why, but this whole loop needs to be on one line like this -->
+                <span class="cat"> Key Themes : {% for category in post.categories %}{% if forloop.first %}{% else %}, {% endif %}<a>{{category | escape}}</a>{% endfor %}</span>
+              </div>
+            </li>
+
       {%- endfor -%}
     </ul>
 
