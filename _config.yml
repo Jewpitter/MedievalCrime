@@ -15,7 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: MedievalCrime
 email: pfau@hendrix.edu
-description: Medieval Crime is cooler than crime these days
+description: >- # this means to ignore newlines until "baseurl:"
+  Medieval Crime is cooler than crime these days
 baseurl: "/crime" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: pfau's twitter

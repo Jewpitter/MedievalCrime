@@ -1,19 +1,37 @@
 ---
 layout: post
-title:  "Example Post#1"
+title:  "Example Post #1"
 date:   2023-02-07 01:34:29 -0600
 categories: [crime, medieval, hist]
 image_url: https://raw.githubusercontent.com/KadenFranklin/blog/main/assets/Peter/23.JPG
 ---
 
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+<!---
+You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different #ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
 To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 
 Jekyll also offers powerful support for code snippets:
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-#gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
 [jekyll-docs]: https://jekyllrb.com/docs/home
 [jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+[jekyll-talk]: https://talk.jekyllrb.com/ -->
+
+This is an example post. We could put anything here.
+> - we can very easily change the layout of the page
+> - we can add pictures
+> - we can add links
+
+
+<h3> here's an example of a picture: </h3>
+![The Bayeaux Tapestry](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Tapisserie_de_Bayeux_31109.jpg/2880px-Tapisserie_de_Bayeux_31109.jpg)
+
+...
+
+<h4> Ok, maybe we shouldn't try the entirety of the Bayeaux Tapestry, but here's one part: </h4>
+![One Part of the Bayeaux Tapestry](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bayeux_Tapestry_scene29-30-31_Harold_coronation.jpg/2880px-Bayeux_Tapestry_scene29-30-31_Harold_coronation.jpg)
+
+
+And [links are easy too!](https://en.wikipedia.org/wiki/King_Arthur)
