@@ -17,7 +17,7 @@ title: MedievalCrime
 email: pfau@hendrix.edu
 description: >- # this means to ignore newlines until "baseurl:"
   Medieval Crime is cooler than crime these days
-baseurl: "/crime" # the subpath of your site, e.g. /blog
+baseurl: "/MedievalCrime" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: pfau's twitter
 github_username:  jewpitter
