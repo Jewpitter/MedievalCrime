@@ -10,8 +10,6 @@ layout: default
   <div class="post-content e-content" itemprop="articleBody">
     {{ content }}
 
-    <!-- Find a way to upload and format word documents or .docx files
-        & hopeully just translate them and their images into html. (If Possible.) -->
   </div>
 
   {%- if site.disqus.shortname -%}
@@ -20,3 +18,51 @@ layout: default
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
+<footer class="site-footer">
+    <!-- <data class="u-url" href="{{ "/" | relative_url }}"></data> -->
+    <div class="wrapper">
+      <div class="footer-col footer-col-1">
+            <ul class="contact-list">
+
+              <li><a class="link" href="{{ page.translation }}"> Translation, </a></li>
+              <li><a class="link" href="{{ page.transcription }}"> Transcription, </a></li>
+              <li><a class="link" href="{{ page.original }}"> Original </a></li>
+
+            </ul>
+      </div>
+    </div>
+</footer>
+
+<!-- script for the min and max button  -->
+<script>
+  function toggleFooter(){
+    const footer = document.querySelector('footer');
+    const smallButton = document.querySelector('#small-button');
+    if (footer.style.display === 'none'){
+      footer.style.display = 'block';
+      smallButton.style.display = 'none';
+    } else{
+      footer.style.display = 'none';
+      smallButton.style.display = 'block';
+    }
+  }
+  const minimizeButton = document.createElement('button');
+  minimizeButton.innerText = '-';
+  minimizeButton.style.position = 'absolute';
+  minimizeButton.style.top = '0';
+  minimizeButton.style.right = '-10';
+  minimizeButton.onclick = toggleFooter
+  minimizeButton.style.margin = '10px';;
+  document.querySelector('footer').appendChild(minimizeButton);
+
+  const smallButton = document.createElement('button');
+  smallButton.innerText = '□';
+  smallButton.id = 'small-button';
+  smallButton.style.position = 'fixed';
+  smallButton.style.bottom = '0';
+  smallButton.style.left = '0';
+  smallButton.onclick = toggleFooter;
+  smallButton.style.margin = '10px';
+  smallButton.style.display = 'none';
+  document.body.appendChild(smallButton);
+</script>

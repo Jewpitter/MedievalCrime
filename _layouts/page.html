@@ -33,12 +33,13 @@ layout: default
         </div> -->
 
         <div class="form-group">
+        <div class="key-themes-container">
           <label for="key-theme-input">Key Themes:</label>
           <div class="d-flex align-items-center">
             <input type="text" class="form-control mr-3" id="key-theme-input" name="key-theme">
             <button type="button" class="btn btn-primary" id="add-key-theme-btn">Add Key Theme</button>
           </div>
-          <div class="key-themes-container"></div>
+          </div>
         </div>
 
         <div class="input-desc">
@@ -91,6 +92,32 @@ layout: default
   </div>
 
   <script>
+      createpostbtn.addEventListener('click', function()){
+      //Get the content
+      const title = document.getElementById('title').value;
+      // const date = document.getElementById('date').value;
+      // const categories = document.getElementById('categories').value;
+      // const image_url = document.getElementById('image_url').value;
+      const content = document.getElementById('content').files[0];
+
+      // Create the file name
+      const fileName = 'posts/' + title.toLowerCase().replace(/ /g, '-') + '.md';
+
+      // Create the file content
+      // const fileContent = `---\nlayout: posts\ntitle: ${title}\ndate: ${date}\ncategories: ${categories}\nimage_url: ${image_url}\n---\n${content}`;
+      const fileContent = `---\nlayout: posts\ntitle: ${title}\n---\n${content}`;
+
+
+      // Create a new file
+      const blob = new Blob([fileContent], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+      });
+  </script>
+
+  <!-- <script>
   let keyThemeContainer = document.querySelector('.key-themes-container');
   let addKeyThemeBtn = document.querySelector('#add-key-theme-btn');
   let keyThemeInput = document.querySelector('#key-theme-input');
@@ -100,7 +127,6 @@ layout: default
     let keyTheme = keyThemeInput.value.trim();
     if (keyTheme !== '') {
       keyThemes.push(keyTheme);
-      keyThemeInput.value = '';
       renderKeyThemes();
     }
   });
@@ -139,4 +165,4 @@ layout: default
     link.click();
 });
 
-  </script>
+  </script> -->

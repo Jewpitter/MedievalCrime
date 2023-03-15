@@ -50,6 +50,22 @@ $on-laptop: 800px !default;
 
 
 // YOU NEED TO PUT .CSS UNDER THESE IMPORT STATEMENTS OR THEY MIGHT BE OVERWRITTEN!!!
+.body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-list li{
+  display: inline;
+}
+
+.site-footer{
+position: sticky;
+bottom:0;
+width: 100vw;
+background: white;
+}
 
 .post-excerpt {
   display: block;
