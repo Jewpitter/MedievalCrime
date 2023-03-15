@@ -11,7 +11,7 @@ layout: default
       <form method="post" enctype="multipart/form-data" id="create-post-form">
         <div class="input-doc">
           <label for="doc">Document:</label>
-          <input type="file" id="doc" name="doc" accept=".docx">
+          <input type="file" id="doc" name="doc" accept=".docx" onchange="openFile(event)">
         </div>
 
         <div class="input-author">
@@ -90,79 +90,23 @@ layout: default
       </form>
     </div>
   </div>
+  <textarea class="form-control" rows=35 cols=120 id="output"></textarea>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.1/jszip.js"></script>
 
   <script>
-      createpostbtn.addEventListener('click', function()){
-      //Get the content
-      const title = document.getElementById('title').value;
-      // const date = document.getElementById('date').value;
-      // const categories = document.getElementById('categories').value;
-      // const image_url = document.getElementById('image_url').value;
-      const content = document.getElementById('content').files[0];
-
-      // Create the file name
-      const fileName = 'posts/' + title.toLowerCase().replace(/ /g, '-') + '.md';
-
-      // Create the file content
-      // const fileContent = `---\nlayout: posts\ntitle: ${title}\ndate: ${date}\ncategories: ${categories}\nimage_url: ${image_url}\n---\n${content}`;
-      const fileContent = `---\nlayout: posts\ntitle: ${title}\n---\n${content}`;
-
-
-      // Create a new file
-      const blob = new Blob([fileContent], { type: 'text/plain' });
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = fileName;
-      link.click();
-      });
+    var openFile = function(event) {
+    var input = event.target;
+    var reader = new FileReader();
+    reader.onload = function() {
+      var zip = new JSZip(reader.result);
+      var doc = new window.docxtemplater().loadZip(zip);
+      var text = doc.getFullText();
+      var node = document.getElementById('output');
+      node.innerText = text;
+    };
+    reader.readAsBinaryString(input.files[0]);
+  };
   </script>
-
-  <!-- <script>
-  let keyThemeContainer = document.querySelector('.key-themes-container');
-  let addKeyThemeBtn = document.querySelector('#add-key-theme-btn');
-  let keyThemeInput = document.querySelector('#key-theme-input');
-  let keyThemes = [];
-
-  addKeyThemeBtn.addEventListener('click', function() {
-    let keyTheme = keyThemeInput.value.trim();
-    if (keyTheme !== '') {
-      keyThemes.push(keyTheme);
-      renderKeyThemes();
-    }
-  });
-
-  function renderKeyThemes() {
-    keyThemeContainer.innerHTML = '';
-    for (let i = 0; i < keyThemes.length; i++) {
-      let label = document.createElement('p');
-      label.textContent = keyThemes[i];
-      keyThemeContainer.appendChild(label);
-
-    }
-  }
-
-  let createpostbtn = document.querySelector('#create-post-btn');
-
-  createpostbtn.addEventListener('click', function()){
-    // Get the user inputs
-    const title = document.getElementById('title').value;
-    const date = document.getElementById('date').value;
-    const categories = document.getElementById('categories').value;
-    const image_url = document.getElementById('image_url').value;
-    const content = document.getElementById('content').value;
-
-    // Create the file name
-    const fileName = 'posts/' + title.toLowerCase().replace(/ /g, '-') + '.md';
-
-    // Create the file content
-    const fileContent = `---\nlayout: posts\ntitle: ${title}\ndate: ${date}\ncategories: ${categories}\nimage_url: ${image_url}\n---\n${content}`;
-
-    // Create a new file
-    const blob = new Blob([fileContent], { type: 'text/plain' });
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = fileName;
-    link.click();
-});
-
-  </script> -->
