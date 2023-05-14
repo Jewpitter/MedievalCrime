@@ -1,1 +1,129 @@
-body {color: #FF0000;}
+
+
+/*  the tooltipimg class lets me put an image in a tooltip!  */
+.tooltipimg {
+  text-decoration:none;
+  position:relative;
+}
+
+.tooltipimg span {
+  display:none;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  color:black;
+  background:white;
+}
+
+.tooltipimg span img {
+  float:left;
+  margin:0px 8px 8px 0;
+}
+
+.tooltipimg:hover span {
+  display:block;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1000;
+  width:auto;
+  max-width:320px;
+  min-height:128px;
+  border:1px solid black;
+  margin-top:12px;
+  margin-left:32px;
+  overflow:hidden;
+  padding:8px;
+}
+
+
+// I'm messing with customizing tooltips below:
+
+.tooltip {
+  position: relative;
+
+  &__item {
+    position: absolute;
+    min-width: 100px;
+    padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    background: white;
+    transition: all .250s cubic-bezier(0, 0, 0.2, 1);
+    color: #484848;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+    font-weight: 500;
+    box-shadow: 0 2px 1px #bcbcbc;
+    z-index: 4;
+    &:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+  }
+
+  &__initiator {
+    cursor: pointer;
+    z-index: 5;
+  }
+
+  &[data-direction="left"] {
+
+    .tooltip__initiator:hover ~ .tooltip__item {
+      transform: translate3d(0, -50%, 0);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip__item {
+      top: 50%;
+      right: calc(100% + 1em);
+      transform: translate3d(15px, -50%, 0);
+
+      &:after {
+        top: 50%;
+        right: -0.5em;
+        transform: translate3d(0, -50%, 0);
+        border-width: 0.5em 0 0.5em 0.5em;
+        border-color: transparent transparent transparent white;
+        -webkit-filter: drop-shadow(1px 2px 1px #bcbcbc);
+        filter: drop-shadow(1px 2px 1px #bcbcbc);
+      }
+    }
+  }
+
+  &[data-direction="bottom"] {
+
+    .tooltip__initiator:hover ~ .tooltip__item {
+      transform: translate3d(-50%, 0, 0);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .tooltip__item {
+      top: calc(100% + 1em);
+      left: 50%;
+      transform: translate3d(-50%, -15px, 0);
+
+      &:after {
+        top: -0.5em;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        border-width: 0 0.5em 0.5em 0.5em;
+        border-color: transparent transparent white transparent;
+        -webkit-filter: drop-shadow(1px 2px 1px #bcbcbc);
+        filter: drop-shadow(1px -1px 1px #bcbcbc);
+      }
+    }
+  }
+}
+
+
+.fa.fa-info-circle {
+  font-size: 38px;
+  color: #21606b;
+}
