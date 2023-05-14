@@ -1,12 +1,12 @@
 
 
-/*  the tooltipimg class lets me put an image in a tooltip!  */
-.tooltipimg {
+/*  the tooltip_img class lets me put an image in a tooltip!  */
+.tooltip_img {
   text-decoration:none;
   position:relative;
 }
 
-.tooltipimg span {
+.tooltip_img span {
   display:none;
   -moz-border-radius:6px;
   -webkit-border-radius:6px;
@@ -15,19 +15,19 @@
   background:white;
 }
 
-.tooltipimg span img {
+.tooltip_img span img {
   float:left;
   margin:0px 8px 8px 0;
 }
 
-.tooltipimg:hover span {
+.tooltip_img:hover span {
   display:block;
   position:absolute;
   top:0;
   left:0;
   z-index:1000;
-  width:auto;
-  max-width:320px;
+  width:320px;
+  max-width:3200px;
   min-height:128px;
   border:1px solid black;
   margin-top:12px;
