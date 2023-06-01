@@ -6,12 +6,15 @@ layout: default
       <h1 class="page-title">{% if page.title %}{{ page.title }}{% else %}Untitled{% endif %}</h1>
     </header>
 
+
     <div class="page-content">
       {{ content }}
+
       <form method="post" enctype="multipart/form-data" id="create-post-form">
-        <div class="input-doc">
-          <label for="doc">Document:</label>
-          <input type="file" id="doc" name="doc" accept=".docx" onchange="openFile(event)">
+
+        <div class="input-title">
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title">
         </div>
 
         <div class="input-author">
@@ -19,33 +22,13 @@ layout: default
           <input type="text" id="author" name="author">
         </div>
 
-        <div class="input-title">
-          <label for="title">Title:</label>
-          <input type="text" id="title" name="title">
-        </div>
-
-        <!-- <div class="input-key-themes">
-          <label for="key-themes">Key Themes:</label>
-          <div id="key-themes-container">
-            <input type="text" name="key-themes[]" class="key-theme-input">
-          </div>
-          <button type="button" id="add-key-theme">Add Key Theme</button>
-        </div> -->
-
-        <div class="form-group">
-        <div class="key-themes-container">
-          <label for="key-theme-input">Key Themes:</label>
+        <div class="input-themes">
+          <label for="key-theme-label">Key Themes:</label>
           <div class="d-flex align-items-center">
-            <input type="text" class="form-control mr-3" id="key-theme-input" name="key-theme">
-            <button type="button" class="btn btn-primary" id="add-key-theme-btn">Add Key Theme</button>
+            <input type="text" class="key-theme" id="key-theme" name="key-theme">
+            <button type="button" class="btn btn-primary" id="add-key-theme-btn" onclick="addKeyThemeInput()" >Add Key Theme</button>
           </div>
           </div>
-        </div>
-
-        <div class="input-desc">
-          <label for="desc">Description:</label>
-          <textarea id="desc" name="desc"></textarea>
-        </div>
 
         <div class="input-cover">
           <label for="cover">Cover image:</label>
@@ -53,60 +36,114 @@ layout: default
         </div>
 
         <div class="input-date">
-          <label for="month">Month:</label>
-          <select id="month" name="month">
-            <option value="">-- Select Month --</option>
-            <option value="1">January</option>
-            <option value="2">February</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          <label for="day">Day:</label>
-          <select id="day" name="day">
-            <option value="">-- Select Day --</option>
-            {% for day in (1..31) %}
-              <option value="{{ day }}">{{ day }}</option>
-            {% endfor %}
-          </select>
-          <label for="year">Year:</label>
-          <select id="year" name="year">
-            <option value="">-- Select Year --</option>
-            {% for year in (2023..2033) %}
-              <option value="{{ year }}">{{ year }}</option>
-            {% endfor %}
-          </select>
+          <label for="title">Date:</label>
+          <input type="date" id="date" name="date">
         </div>
 
-        <input type="submit"  class="btn create-post-btn" id="create-post-btn" value="Create post">
+
+        <div class="input-doc">
+          <label for="doc">Document:</label>
+          <input type="file" id="doc" name="doc" accept=".docx"  onchange="openFile(event)">
+        </div>
+
+        <div class="input-translation">
+          <label for="trans">Link-to Translation:</label>
+          <input type="text" id="translation" name="translation">
+        </div>
+
+        <div class="input-transcription">
+          <label for="transc">Link-to Transcription:</label>
+          <input type="text" id="transcription" name="transcription">
+        </div>
+
+        <div class="input-original">
+          <label for="org">Link-to Original Text:</label>
+          <input type="text" id="original" name="original">
+        </div>
+
+        <textarea hidden id="output" name="output" rows="8" cols="80"></textarea>
+
+        <input type="submit"  class="submit-btn" id="create-post-btn" value="Create post" onclick="createMarkdownFile()">
 
       </form>
     </div>
   </div>
-  <textarea class="form-control" rows=35 cols=120 id="output"></textarea>
 
-
+  <!-- these are required for openFile(event) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/docxtemplater/3.1.9/docxtemplater.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.6.1/jszip.js"></script>
 
-  <script>
-    var openFile = function(event) {
-    var input = event.target;
-    var reader = new FileReader();
-    reader.onload = function() {
-      var zip = new JSZip(reader.result);
-      var doc = new window.docxtemplater().loadZip(zip);
-      var text = doc.getFullText();
-      var node = document.getElementById('output');
-      node.innerText = text;
-    };
-    reader.readAsBinaryString(input.files[0]);
-  };
-  </script>
+<script>
+  function createMarkdownFile() {
+  // Get input values
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  const ktlist = Array.from(document.getElementsByClassName('key-theme')).map(input => input.value);
+  const keyThemes = '[' + ktlist.join(', ') + ']';
+  const coverFile = document.getElementById('cover').files[0];
+  const date = fixDate(document.getElementById('date').value);
+  const documentFile = document.getElementById('doc').files[0];
+  const translation = document.getElementById('translation').value;
+  const transcription = document.getElementById('transcription').value;
+  const original = document.getElementById('original').value;
+  // Create Markdown content
+  let markdownContent = `---\nlayout: posts\ntitle: "${title}"\n`;
+  markdownContent += `date: ${date} 01:00:00 -0600 \n`;
+  markdownContent += `categories: ${keyThemes}\n`;
+  if (coverFile) {   // Create a File object for cover image
+    markdownContent += `image_url: ${coverFile.name}\n`;
+  }
+  markdownContent += `translation: ${translation} \n`;
+  markdownContent += `transcription: ${transcription}\n`;
+  markdownContent += `original: ${original}\n\n---`;
+  markdownContent += `author/researcher: ${author}\n\n`;
+
+  // see the openFile(event) function at bottom for turning word doc to string
+    if (documentFile) {
+      const output = document.getElementById('output').innerText;
+      markdownContent += `${output}\n`;
+    }
+    // Create a Markdown file without document content
+    const blob = new Blob([markdownContent], { type: 'text/plain' });
+    // Create a temporary anchor element to trigger the file download
+    const anchor = document.createElement('a');
+    anchor.download = `${date}-${title}.md`;
+    anchor.href = URL.createObjectURL(blob);
+    anchor.target = '_blank'; // Open the download in a new tab
+    anchor.click();
+    // Clean up the temporary anchor element
+    URL.revokeObjectURL(anchor.href);
+}
+
+function fixDate(inputDate) {
+  const date = new Date(inputDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+function addKeyThemeInput() {
+  const keyThemeInput = document.createElement('input');
+  keyThemeInput.type = 'text';
+  keyThemeInput.className = 'key-theme';
+  keyThemeInput.name = 'key-theme';
+  const addKeyThemeBtn = document.getElementById('add-key-theme-btn');
+  addKeyThemeBtn.parentNode.insertBefore(keyThemeInput, addKeyThemeBtn);
+}
+</script>
+
+<script>
+var openFile = function(event) {
+var input = event.target;
+var reader = new FileReader();
+reader.onload = function() {
+  var zip = new JSZip(reader.result);
+  var doc = new window.docxtemplater().loadZip(zip);
+  var text = doc.getFullText();
+  var node = document.getElementById('output');
+  node.innerText = text;
+};
+reader.readAsBinaryString(input.files[0]);
+};
+</script>

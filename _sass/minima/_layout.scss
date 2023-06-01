@@ -213,33 +213,81 @@
 /**
  * Pages  (The things for creating posts)
  */
-
-.input-doc,
-.input-date,
+.input-title,
 .input-author,
-.input-desc,
+.input-themes,
 .input-cover {
    margin: 20px 0;
    display: flex;
    align-items: center;
  }
+.input-date{
+   margin: 20px 0;
+   display: flex;
+   align-items: center;
+ }
+.input-doc{
+   margin: 20px 0;
+   display: flex;
+   align-items: center;
+ }
+ .input-translation{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+  }
+ .input-transcription{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+  }
+ .input-original{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+  }
 
-.input-doc label,
-.input-date label,
+.input-title label,
 .input-author label,
-.input-desc label,
+.input-themes label,
 .input-cover label {
    flex: 0 0 120px;
    padding-right: 20px;
  }
+.input-date label{
+   flex: 0 0 120px;
+   padding-right: 20px;
+ }
+.input-doc label{
+   flex: 0 0 120px;
+   padding-right: 20px;
+ }
+ .input-translation label{
+    flex: 0 0 120px;
+    padding-right: 20px;
+  }
+ .input-transcription label{
+    flex: 0 0 120px;
+    padding-right: 20px;
+  }
+ .input-original label{
+    flex: 0 0 120px;
+    padding-right: 20px;
+  }
 
-.input-doc input[type="file"],
-.input-date select,
-.input-author input,
-.input-desc textarea,
+//Title, Author, and Themes are all just basic text
+  // list of themes handled through the functions in _layouts/page.html
+
 .input-cover input[type="file"] {
   flex: 1;
 }
+.input-date select,
+.input-doc input[type="file1"],
+
+.key-theme{
+  margin: 5px;
+}
+
 
 /**
  * Posts
@@ -266,7 +314,6 @@
 }
 
 .post-content {
-
   h2 {
     @include relative-font-size(2);
 
