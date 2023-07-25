@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Example Post #1"
-date:   2023-02-07 01:34:29 -0600
 categories: [crime, medieval, hist]
 image_url: https://raw.githubusercontent.com/KadenFranklin/blog/main/assets/Peter/23.JPG
 translation:	https://hendrix.sharepoint.com/:w:/r/sites/MedievalFrenchCrimeWebsiteProject/_layouts/15/Doc.aspx?sourcedoc=%7B2278A96A-84D2-40E8-BB21-B9B1CDEC4D79%7D&file=AN%20JJ%20188%20fo%2081%20no%20160%20Translation.docx&action=default&mobileredirect=true&cid=854f5d87-f0a8-430d-868b-7515693a977f
