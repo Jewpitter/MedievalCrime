@@ -17,6 +17,10 @@ layout: default
       </p>
       -->
       </h1>
+      <div class = "key_terms">
+        <!-- Don't Ask me why, but this whole loop needs to be on one line like this -->
+        <span class="cat"> Key Themes : {% for category in post.categories %}{% if forloop.first %}{% else %}, {% endif %}<a>{{category | escape}}</a>{% endfor %}</span>
+        </div>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">

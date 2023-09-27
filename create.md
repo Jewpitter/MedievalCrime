@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: createPage
 title: Create
 permalink: /create/
 ---
