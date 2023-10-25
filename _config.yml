@@ -26,7 +26,7 @@ github_username:  jewpitter
 markdown: kramdown
 # theme: minimal-mistakes-jekyll
 #changing theme! -Josh
-# remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+remote_theme: mmistakes/minimal-mistakes@4.24.0
 plugins:
   - jekyll-feed
 
